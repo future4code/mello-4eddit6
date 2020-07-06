@@ -7,14 +7,6 @@ const PostCard = () => {
     const [ positiveVote, setPositiveVote ] = useState(false)
     const [ negativeVote, setNegativeVote ] = useState(false)
 
-    const handleClick = () => {
-        if(!positiveVote || positiveVote){
-            setPositiveVote(!positiveVote)
-        }else if(!negativeVote || negativeVote){
-            setNegativeVote(!negativeVote)
-        }
-    }
-
     return(
         <PostCardContainer>
             <InfoBars>
