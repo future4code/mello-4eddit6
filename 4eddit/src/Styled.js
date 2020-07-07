@@ -4,7 +4,8 @@ export const AppContainer = styled.div`
 	max-width: 100vw;
 	min-height: 100vh;
 	display: flex;
-	justify-content: center;
+  flex-direction: column;
+	justify-content: flex-start;
 	align-items: center;
 `
 
@@ -33,17 +34,20 @@ export const ContentContainer = styled.div`
 	flex: 1;
 	padding: 16px;
 	display: flex;
+  flex-direction: column;
 `
 
 export const BottomDetails = styled.div`
-	flex: 1;
 	display: flex;
 	align-items: center;
 	padding: 8px;
-	justify-content: space-between;
 
-	:last-of-type{
-		flex: 7;
-		justify-content: flex-end;
-	}
+  :nth-of-type(n){
+    flex:1;
+    justify-content: flex-start;
+  }
+  :nth-of-type(2n){
+    flex: 1;
+    justify-content: flex-end;
+  }
 `
