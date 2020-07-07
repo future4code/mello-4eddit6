@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { PostCardContainer, InfoBars, ContentContainer, BottomDetails } from './Styled'
+import { CardContainer, InfoBars, ContentContainer, BottomDetails } from '../../Styled'
 import { ArrowUpward, ArrowDownward } from '@material-ui/icons'
 
 const PostCard = () => {
 
-    const [ positiveVote, setPositiveVote ] = useState(false)
+    const [ positiveVote, setPositiveVote ] = useState(true)
     const [ negativeVote, setNegativeVote ] = useState(false)
+    
 
     return(
-        <PostCardContainer>
+        <CardContainer>
             <InfoBars>
                 Nome do usuário
             </InfoBars>
@@ -19,15 +20,15 @@ const PostCard = () => {
 
             <InfoBars>
                 <BottomDetails>
-                    <ArrowUpward onClick={handleClick} style={{color: (positiveVote ? '#108238' : '#000000')}} />
+                    <ArrowUpward style={{color: (positiveVote ? '#108238' : '#000000')}} />
                     0
-                    <ArrowDownward onClick={handleClick} style={{color: (negativeVote ? '#FF0000' : '#000000')}} />
+                    <ArrowDownward style={{color: (negativeVote ? '#FF0000' : '#000000')}} />
                 </BottomDetails>
                 <BottomDetails>
                     0 comentarios
                 </BottomDetails>
             </InfoBars>
-        </PostCardContainer>
+        </CardContainer>
     )
 }
 

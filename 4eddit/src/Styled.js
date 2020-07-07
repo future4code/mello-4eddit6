@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-export const PostCardContainer = styled.div`
+export const AppContainer = styled.div`
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+export const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 600px;
@@ -21,7 +29,6 @@ export const InfoBars = styled.div`
         height: 30px;
     }
 `
-
 export const ContentContainer = styled.div`
     flex: 1;
     padding: 16px;
