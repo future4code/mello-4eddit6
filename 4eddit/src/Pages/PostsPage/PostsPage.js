@@ -4,12 +4,12 @@ import CommentsCard from '../../Components/CommentsCard/CommentsCard'
 
 
 const PostsPage = () => {
-    return(
-        <div>
-            <PostCard />
-            <CommentsCard />
-        </div>
-    )
+  return(
+    <div>
+      <PostCard />
+      <CommentsCard />
+		</div>
+  )
 }
 
 export default PostsPage

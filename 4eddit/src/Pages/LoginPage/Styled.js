@@ -29,8 +29,9 @@ export const LoginFieldsContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid black;
-  width: 300px;
+  width: 400px;
   height: 360px;
+  border-radius: 10px;
   padding: 16px;
 
   h3{
