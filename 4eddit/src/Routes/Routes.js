@@ -8,7 +8,7 @@ import FeedPage from "../Pages/FeedPage/FeedPage";
 function PrivateRoute({ component: Component, ...rest }) {
 	const token = window.localStorage.getItem("token");
 
-	const route = token ? (
+	const route = !token ? (
 	<Redirect to="/" />
 	) : (
 	<Route {...rest} component={Component} />
@@ -22,7 +22,7 @@ const Routes = () => {
 		<Switch>
 			<Route exact path="/" component={LoginPage} />
 			<Route exact path="/signup" component={SignUpPage} />
-			<PrivateRoute exact path="/feed" component={FeedPage} />
+			<PrivateRoute exact path="/posts" component={FeedPage} />
 			<PrivateRoute exact path="/posts/:postId" component={PostsPage} />
 		</Switch>
 	);

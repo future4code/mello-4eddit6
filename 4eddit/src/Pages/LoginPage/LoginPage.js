@@ -17,15 +17,19 @@ import {
   Visibility 
 } from '@material-ui/icons'
 import { useHistory } from "react-router-dom";
-import { useForm } from '../../Hooks/Hooks'
+import { useToken } from '../../Hooks/UseToken'
+import { useForm } from '../../Hooks/UseForm'
 import SideImage from "../../Components/SideImage/SideImage";
+import api from '../../Utils/Api/Api'
 
-export default function LoginPage() {
-  
+const LoginPage = () => {
+
+  useToken()
+
   const [ showPassword, setShowPassword ] = useState(false)
   const history = useHistory()
 
-  const handleClick = () => {
+  const goToSignup = () => {
     history.push('/signup')
   }
 
@@ -37,6 +41,20 @@ export default function LoginPage() {
   const handleChange = (event) => {
     const { name, value } = event.target
     onChange(name, value)
+  }
+
+  const body = {
+    email: form.email,
+    password: form.password
+  }
+
+  const onClickLogin = () => {
+    clear()
+    api.post('/login', body).then(response => {
+      alert('Login feito com sucesso')
+      window.localStorage.setItem('token', response.data.token)
+      history.push('/feed')
+    })
   }
 
   return (
@@ -87,6 +105,7 @@ export default function LoginPage() {
           <Button 
             variant='contained' 
             fullWidth
+            onClick={onClickLogin}
           >
             Entrar
           </Button>
@@ -95,7 +114,7 @@ export default function LoginPage() {
           <Button 
             variant='contained' 
             fullWidth 
-            onClick={handleClick}
+            onClick={goToSignup}
           >
             Criar conta com e-mail
           </Button>
@@ -104,3 +123,5 @@ export default function LoginPage() {
     </LoginContainer>
   );
 }
+
+export default LoginPage

@@ -9,9 +9,10 @@ import {
 } from './Styled'
 import { TextField, Button, IconButton } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
-import { useForm } from '../../Hooks/Hooks'
+import { useForm } from '../../Hooks/UseForm'
 import { useHistory } from 'react-router-dom'
 import SideImage from '../../Components/SideImage/SideImage'
+import api from '../../Utils/Api/Api'
 
 
 const SignUpPage = () => {
@@ -27,6 +28,19 @@ const SignUpPage = () => {
   const handleChange = (event) => {
     const { name, value } = event.target
     onChange(name, value)
+  }
+
+  const body = {
+    email: form.email,
+    password: form.password,
+    username: form.username
+  }
+
+  const onClickRegister = () => {
+    clear()
+    api.post('/signup', body).then(response => {
+      alert('criado com sucesso.')
+    })
   }
 
 
@@ -79,7 +93,7 @@ const SignUpPage = () => {
 					</SignUpFields>
 
 					<ButtonsContainer>
-						<Button variant='contained' >Cadastrar</Button>
+						<Button onClick={onClickRegister} variant='contained' >Cadastrar</Button>
 						<Button onClick={() => history.goBack()}>Voltar para login</Button>
 					</ButtonsContainer>
 				</SignUpContainer>
