@@ -6,16 +6,11 @@ export const FullContainer = styled.div`
   height: 100vh;
 `
 
-export const ScreenDivision = styled.div`
+export const HalfScreen = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  :first-of-type{
-		background-image: url('https://images5.alphacoders.com/387/387334.jpg');
-		background-repeat: no-repeat;
-}
 `
 
 export const SignUpContainer = styled.div`

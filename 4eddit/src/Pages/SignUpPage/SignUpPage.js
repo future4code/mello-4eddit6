@@ -4,13 +4,14 @@ import {
 	Divider, 
 	ButtonsContainer,
 	SignUpFields,
-	ScreenDivision,
-	FullContainer
+  FullContainer,
+  HalfScreen
 } from './Styled'
 import { TextField, Button, IconButton } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
 import { useForm } from '../../Hooks/Hooks'
 import { useHistory } from 'react-router-dom'
+import SideImage from '../../Components/SideImage/SideImage'
 
 
 const SignUpPage = () => {
@@ -31,12 +32,10 @@ const SignUpPage = () => {
 
 	return(
 		<FullContainer>
-			<ScreenDivision>
 
-			</ScreenDivision>
-
-			<ScreenDivision>
-				<SignUpContainer>
+			<SideImage />
+      <HalfScreen>
+        <SignUpContainer>
           <Button 
             variant='contained' 
             style={{background: '#2F5ABA', color: '#FFFFFF'}}
@@ -83,9 +82,8 @@ const SignUpPage = () => {
 						<Button variant='contained' >Cadastrar</Button>
 						<Button onClick={() => history.goBack()}>Voltar para login</Button>
 					</ButtonsContainer>
-					
 				</SignUpContainer>
-			</ScreenDivision>
+      </HalfScreen>
 		</FullContainer>
 	)
 }
