@@ -5,23 +5,11 @@ export const LoginContainer = styled.div`
   width: 100%;
   height: 100vh;
 `
-
-export const ScreenDivision = styled.div`
+export const HalfScreen = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  :first-of-type{
-    background-image: url('https://images5.alphacoders.com/387/387334.jpg');
-    background-repeat: no-repeat;
-  }
-`
-
-export const Logo = styled.div`
-  h3 {
-    color: white;
-  }
 `
 
 export const LoginFieldsContainer = styled.div`
@@ -29,8 +17,9 @@ export const LoginFieldsContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid black;
-  width: 300px;
+  width: 400px;
   height: 360px;
+  border-radius: 10px;
   padding: 16px;
 
   h3{

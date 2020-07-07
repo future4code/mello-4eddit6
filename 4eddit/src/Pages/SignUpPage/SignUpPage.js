@@ -1,59 +1,91 @@
 import React, { useState } from 'react'
 import { 
-    SignUpContainer, 
-    Divider, 
-    ButtonsContainer,
-    SignUpFields,
-    ScreenDivision,
-    FullContainer
+	SignUpContainer, 
+	Divider, 
+	ButtonsContainer,
+	SignUpFields,
+  FullContainer,
+  HalfScreen
 } from './Styled'
 import { TextField, Button, IconButton } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
+import { useForm } from '../../Hooks/Hooks'
+import { useHistory } from 'react-router-dom'
+import SideImage from '../../Components/SideImage/SideImage'
 
 
 const SignUpPage = () => {
 
-    const [ showPassword, setShowPassword ] = useState(false)
+  const [ showPassword, setShowPassword ] = useState(false)
+  const history = useHistory()
+  const { form, onChange, clear } = useForm({
+    username: '',
+    email: '',
+    password: ''
+  })
 
-    return(
-        <FullContainer>
-            <ScreenDivision>
-                
-            </ScreenDivision>
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    onChange(name, value)
+  }
 
-            <ScreenDivision>
-                <SignUpContainer>
-                    <Button variant='contained' style={{background: '#2F5ABA', color: '#FFFFFF'}}>Cadastre-se com o facebook</Button>
 
-                    <Divider>ou</Divider>
+	return(
+		<FullContainer>
 
-                    <SignUpFields>
-                        <TextField variant='outlined' label='Nome de usuário'/>
+			<SideImage />
+      <HalfScreen>
+        <SignUpContainer>
+          <Button 
+            variant='contained' 
+            style={{background: '#2F5ABA', color: '#FFFFFF'}}
+          >
+            Cadastre-se com o facebook
+          </Button>
 
-                        <TextField variant='outlined' label='Email' />
+					<Divider>ou</Divider>
 
-                        <TextField 
-                            variant='outlined' 
-                            label='Password' 
-                            type={showPassword ? 'text' : 'password'} 
-                            InputProps={{
-                                endAdornment: (   
-                                    <IconButton onClick={() => setShowPassword(!showPassword)}>
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                )
-                        }} />
-                    </SignUpFields>
+					<SignUpFields>
+            <TextField 
+              name='username' 
+              value={form.username}
+              onChange={handleChange}
+              variant='outlined' 
+              label='Nome de usuário'
+            />
 
-                    <ButtonsContainer>
-                        <Button variant='contained' >Cadastrar</Button>
-                        <Button>Voltar para login</Button>
-                    </ButtonsContainer>
-                    
-                </SignUpContainer>
-            </ScreenDivision>
-        </FullContainer>
-    )
+            <TextField 
+              name='email' 
+              value={form.email}
+              onChange={handleChange}
+              variant='outlined' 
+              label='Email' 
+            />
+
+            <TextField 
+              name='password'
+              value={form.password}
+              onChange={handleChange}
+							variant='outlined' 
+							label='Password' 
+							type={showPassword ? 'text' : 'password'} 
+							InputProps={{
+								endAdornment: (   
+									<IconButton onClick={() => setShowPassword(!showPassword)}>
+										{showPassword ? <Visibility /> : <VisibilityOff />}
+									</IconButton>
+								)
+						}} />
+					</SignUpFields>
+
+					<ButtonsContainer>
+						<Button variant='contained' >Cadastrar</Button>
+						<Button onClick={() => history.goBack()}>Voltar para login</Button>
+					</ButtonsContainer>
+				</SignUpContainer>
+      </HalfScreen>
+		</FullContainer>
+	)
 }
 
 export default SignUpPage
