@@ -6,4 +6,11 @@ export const Container = styled.div`
   gap: 8px;
   margin: 32px;
   min-height: auto;
+  overflow: auto;
+`;
+
+export const GoBackContainer = styled.div`
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
 `;

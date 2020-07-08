@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
 	SignUpContainer, 
 	Divider, 
@@ -16,6 +16,14 @@ import api from '../../Utils/Api/Api'
 
 
 const SignUpPage = () => {
+
+  const token = localStorage.getItem('token')
+  
+  useEffect(() => {
+    if(token){
+      history.replace('/posts')
+    }
+  })
 
   const [ showPassword, setShowPassword ] = useState(false)
   const history = useHistory()
@@ -42,7 +50,6 @@ const SignUpPage = () => {
       alert('criado com sucesso.')
     })
   }
-
 
 	return(
 		<FullContainer>

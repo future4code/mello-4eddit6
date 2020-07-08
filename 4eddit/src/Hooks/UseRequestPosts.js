@@ -1,23 +1,23 @@
 import { useState, useEffect } from 'react'
 import api from '../Utils/Api/Api'
 
-export const useRequestPost = (url) => {
-  const [ data, setData ] = useState({})
+export const useRequestPosts = (url) => {
+  const [ posts, setPosts ] = useState([])
   const token = window.localStorage.getItem('token')
 
-  const getPostDetail = async() => {
+  const getPosts = async() => {
     const axiosConfig = {
       headers:  {
           Authorization: token
       }
   }
     const response = await api.get(url, axiosConfig)
-    setData(response.data)
+    setPosts(response.data.posts)
   }
 
   useEffect(() => {
-    getPostDetail()
-  }, [url])
+    getPosts()
+  },[])
 
-  return { data, getPostDetail }
+  return { posts, getPosts }
 }
