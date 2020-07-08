@@ -1,21 +1,27 @@
-import React, { useReducer } from "react";
-import { AppContainer } from './Styled'
+import React, { useEffect } from "react";
 import Routes from "./Routes/Routes";
 import { BrowserRouter } from 'react-router-dom'
 import FeedContext from './Utils/Context/FeedContext'
-import { useRequestData } from './Hooks/UseRequestData'
+import { useRequestPosts } from "./Hooks/UseRequestPosts";
 
-function App() {
+const App = () => {
 
-  const { data } = useRequestData('/posts')
-  const posts = data.posts
+  const { posts } = useRequestPosts('/posts')
+
+  const getToken = () => {
+    return localStorage.getItem('token')
+  }
+
+  useEffect(() => {
+    getToken()
+  })
 
   return (
-    <FeedContext.Provider value={posts}>
+    <FeedContext.Provider value ={posts}>
         <BrowserRouter>
-          <AppContainer>
+          {/* <AppContainer token={getToken()}> */}
             <Routes />
-          </AppContainer>
+          {/* </AppContainer> */}
         </BrowserRouter>
     </FeedContext.Provider>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import SignUpPage from "../Pages/SignUpPage/SignUpPage";
-import LoginPage from "../Pages/LoginPage/LoginPage";
-import PostsPage from "../Pages/PostsPage/PostsPage";
-import FeedPage from "../Pages/FeedPage/FeedPage";
+import SignUpPage from "../Pages/SignUpPage";
+import LoginPage from "../Pages/LoginPage";
+import FeedPage from '../Pages/FeedPage'
+import PostsPage from '../Pages/PostsPage'
 
 function PrivateRoute({ component: Component, ...rest }) {
 	const token = window.localStorage.getItem("token");

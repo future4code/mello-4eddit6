@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const AppContainer = styled.div`
+export const FullContainer = styled.div`
 	max-width: 100vw;
-	min-height: 100vh;
+	height: 100vh;
+  background: url('https://images5.alphacoders.com/387/387334.jpg');
 	display: flex;
   flex-direction: column;
 	justify-content: flex-start;
@@ -10,10 +11,11 @@ export const AppContainer = styled.div`
 `
 
 export const CardContainer = styled.div`
+  min-height: auto;
 	display: flex;
+  background: white;
 	flex-direction: column;
 	width: 600px;
-	min-height: 300px;
 	border: 1px solid black;
 `;
 
@@ -31,7 +33,7 @@ export const InfoBars = styled.div`
 	}
 `
 export const ContentContainer = styled.div`
-	flex: 1;
+	min-height: 100px;
 	padding: 16px;
 	display: flex;
   flex-direction: column;

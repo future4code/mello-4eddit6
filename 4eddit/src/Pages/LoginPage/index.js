@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   LoginContainer, 
   LoginFieldsContainer,
@@ -14,20 +14,25 @@ import {
 } from '@material-ui/core'
 import { 
   VisibilityOff, 
-  Visibility 
+  Visibility
 } from '@material-ui/icons'
 import { useHistory } from "react-router-dom";
-import { useToken } from '../../Hooks/UseToken'
 import { useForm } from '../../Hooks/UseForm'
 import SideImage from "../../Components/SideImage/SideImage";
 import api from '../../Utils/Api/Api'
 
 const LoginPage = () => {
 
-  useToken()
-
   const [ showPassword, setShowPassword ] = useState(false)
   const history = useHistory()
+
+  const token = localStorage.getItem('token')
+  
+  useEffect(() => {
+    if(token){
+      history.replace('/posts')
+    }
+  })
 
   const goToSignup = () => {
     history.push('/signup')
@@ -53,7 +58,7 @@ const LoginPage = () => {
     api.post('/login', body).then(response => {
       alert('Login feito com sucesso')
       window.localStorage.setItem('token', response.data.token)
-      history.push('/feed')
+      history.push('/posts')
     })
   }
 

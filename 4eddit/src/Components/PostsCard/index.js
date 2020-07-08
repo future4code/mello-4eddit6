@@ -1,20 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import { CardContainer, InfoBars, ContentContainer, BottomDetails } from '../../Styled'
 import { ArrowUpward, ArrowDownward } from '@material-ui/icons'
-import FeedContext from '../../Utils/Context/FeedContext'
 import { Typography } from '@material-ui/core'
-import { useToken } from '../../Hooks/UseToken'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 const PostCard = (props) => {
-
-  useToken()
 
   const postInfo = props.post
   
   const history = useHistory()
 
-  const goToPostDetails = (id) => {
+  const { postId } = useParams()
+
+  const goToDetails = (id) => {
     history.push(`/posts/${id}`)
   }
 
@@ -24,17 +22,19 @@ const PostCard = (props) => {
         <Typography variant='h5'>{postInfo.username}</Typography>
 			</InfoBars>
 			<ContentContainer>
-        <Typography variant='h5'>{postInfo.title}</Typography><br/>
+        <Typography variant='h5'>{postInfo.title}</Typography>
         <Typography variant='h6'>{postInfo.text}</Typography>
 			</ContentContainer>
-			<InfoBars>
+      <InfoBars>
 				<BottomDetails>
 					<ArrowUpward />
           <Typography>{postInfo.votesCount}</Typography>
 					<ArrowDownward />
 				</BottomDetails>
 				<BottomDetails>
-          <Typography onClick={() => goToPostDetails(postInfo.id)}>{postInfo.commentsCount} comentários</Typography>
+          { postId ? <Typography>{postInfo.commentsCount} comentários</Typography>:
+          <Typography onClick={() => goToDetails(postInfo.id)}>{postInfo.commentsCount} comentários</Typography>
+          }
 				</BottomDetails>
 			</InfoBars>
 		</CardContainer>
