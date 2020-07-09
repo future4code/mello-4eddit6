@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { 
 	SignUpContainer, 
 	Divider, 
-	ButtonsContainer,
 	SignUpFields,
   FullContainer,
-  HalfScreen
+  HalfScreen,
+  Form
 } from './Styled'
 import { TextField, Button, IconButton } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons'
@@ -44,10 +44,13 @@ const SignUpPage = () => {
     username: form.username
   }
 
-  const onClickRegister = () => {
+  const onClickRegister = (e) => {
+    e.preventDefault()
     clear()
     api.post('/signup', body).then(response => {
       alert('criado com sucesso.')
+    }).catch(e => {
+      alert('Algo aconteceu' + e)
     })
   }
 
@@ -55,6 +58,7 @@ const SignUpPage = () => {
 		<FullContainer>
 
 			<SideImage />
+
       <HalfScreen>
         <SignUpContainer>
           <Button 
@@ -66,43 +70,42 @@ const SignUpPage = () => {
 
 					<Divider>ou</Divider>
 
-					<SignUpFields>
-            <TextField 
-              name='username' 
-              value={form.username}
-              onChange={handleChange}
-              variant='outlined' 
-              label='Nome de usuário'
-            />
+          <Form>
+            <SignUpFields>
+              <TextField 
+                name='username' 
+                value={form.username}
+                onChange={handleChange}
+                variant='outlined' 
+                label='Nome de usuário'
+              />
 
-            <TextField 
-              name='email' 
-              value={form.email}
-              onChange={handleChange}
-              variant='outlined' 
-              label='Email' 
-            />
-
-            <TextField 
-              name='password'
-              value={form.password}
-              onChange={handleChange}
-							variant='outlined' 
-							label='Password' 
-							type={showPassword ? 'text' : 'password'} 
-							InputProps={{
-								endAdornment: (   
-									<IconButton onClick={() => setShowPassword(!showPassword)}>
-										{showPassword ? <Visibility /> : <VisibilityOff />}
-									</IconButton>
-								)
-						}} />
-					</SignUpFields>
-
-					<ButtonsContainer>
-						<Button onClick={onClickRegister} variant='contained' >Cadastrar</Button>
+              <TextField 
+                name='email' 
+                value={form.email}
+                onChange={handleChange}
+                variant='outlined' 
+                label='Email' 
+              />
+              <TextField 
+                name='password'
+                value={form.password}
+                onChange={handleChange}
+                variant='outlined' 
+                label='Password'
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                      )
+                }} />
+            </SignUpFields>
+            <Button type='submit' onClick={onClickRegister} variant='contained' >Cadastrar</Button>
+          </Form>
 						<Button onClick={() => history.goBack()}>Voltar para login</Button>
-					</ButtonsContainer>
+
 				</SignUpContainer>
       </HalfScreen>
 		</FullContainer>
