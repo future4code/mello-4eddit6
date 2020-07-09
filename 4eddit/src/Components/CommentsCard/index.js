@@ -13,7 +13,7 @@ const CommentsCard = (props) => {
         <Typography variant='h5'>{comment.username}</Typography>
 			</InfoBars>
 			<ContentContainer>
-        <Typography variant='h5'>{comment.title}</Typography><br/>
+        <Typography variant='h5'>{comment.title}</Typography>
         <Typography variant='h6'>{comment.text}</Typography>
 			</ContentContainer>
 			<InfoBars>
