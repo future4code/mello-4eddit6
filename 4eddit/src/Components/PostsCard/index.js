@@ -15,7 +15,7 @@ const PostCard = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2100)
+    }, 3000)
     return () => clearTimeout(timer)
 
   },[])
@@ -27,11 +27,11 @@ const PostCard = (props) => {
 	return(
 		<CardContainer>
 			<InfoBars>
-        <Typography variant='h5'>{ isLoading  ? <Skeleton height={20} width={200} /> : postInfo.username}</Typography>
+        <Typography variant='h5'>{ isLoading  ? <Skeleton height={'auto'} width={200} /> : postInfo.username}</Typography>
 			</InfoBars>
 			<ContentContainer>
-        <Typography variant='h5'>{ isLoading  ? <Skeleton height={20} width={200} /> : postInfo.title}</Typography>
-        <Typography variant='h6'>{ isLoading  ? <Skeleton height={20} width={200} /> : postInfo.text}</Typography>
+        <Typography variant='h5'>{ isLoading  ? <Skeleton width={200} /> : postInfo.title}</Typography>
+        <Typography variant='h6'>{ isLoading  ? <Skeleton width={200} /> : postInfo.text}</Typography>
 			</ContentContainer>
       <InfoBars>
 				<BottomDetails>
@@ -41,7 +41,7 @@ const PostCard = (props) => {
 				</BottomDetails>
 				<BottomDetails>
           { postId ? <Typography>{ isLoading  ? <Skeleton height={16} width={20} /> : postInfo.commentsCount} comentários</Typography>:
-          <Typography onClick={() => goToDetails(postInfo.id)}>{postInfo.commentsCount} comentários</Typography>
+          <Typography onClick={() => goToDetails(postInfo.id)}>{ isLoading  ? <Skeleton height={16} width={20} /> :postInfo.commentsCount} comentários</Typography>
           }
 				</BottomDetails>
 			</InfoBars>

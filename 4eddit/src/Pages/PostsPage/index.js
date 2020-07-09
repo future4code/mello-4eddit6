@@ -7,7 +7,6 @@ import {  ArrowBack } from '@material-ui/icons'
 import {  makeStyles, Fab } from '@material-ui/core'
 import { FullContainer } from '../../Styled'
 import api from '../../Utils/Api/Api'
-import Skeleton from 'react-loading-skeleton'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -48,8 +47,7 @@ const PostsPage = () => {
     <FullContainer>
       <Container>
         <PostCard post={details} />
-        {comments === undefined ? Array(9).fill().map((item, idx) => (<Skeleton key={idx} width={600} height={200} />)) :
-          comments.map(comment => (<CommentsCard key={comment.id} comment={comment} />))}
+        {comments && comments.map(comment => (<CommentsCard key={comment.id} comment={comment} />))}
         <GoBackContainer>
           <Fab size='large' variant='extended' className={classes.margin} onClick={() => history.push('/posts')}>
             <ArrowBack className={classes.extendedIcon} />
