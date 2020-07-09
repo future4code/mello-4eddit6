@@ -37,15 +37,22 @@ export const FieldsContainer = styled.div`
 
 export const Divider = styled.span`
 	display: flex;
-    align-items: center;
+  align-items: center;
 	color: rgba(0, 0, 0, 0.35);
 	margin: 8px 0px;
     
-    ::before, ::after {
-	content: "";
-	flex-grow: 1;
-	background: rgba(0, 0, 0, 0.35);
-	height: 1px;
+  ::before, ::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
     margin: 0px 10px;
-    }
+  }
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
 `

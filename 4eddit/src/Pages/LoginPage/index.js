@@ -4,7 +4,8 @@ import {
   LoginFieldsContainer,
   FieldsContainer, 
   Divider ,
-  HalfScreen
+  HalfScreen,
+  Form
 } from "./Styled";
 import { 
   TextField, 
@@ -53,7 +54,8 @@ const LoginPage = () => {
     password: form.password
   }
 
-  const onClickLogin = () => {
+  const onClickLogin = (e) => {
+    e.preventDefault()
     clear()
     api.post('/login', body).then(response => {
       alert('Login feito com sucesso')
@@ -75,45 +77,48 @@ const LoginPage = () => {
           >
             Login
           </Typography>
-          <FieldsContainer>
-            <TextField
-              name='email'
-              value={form.email}
-              onChange={handleChange}
-              variant='outlined' 
-              label='Email' 
-            />
+          <Form type='post'>
+            <FieldsContainer>
+              <TextField
+                name='email'
+                value={form.email}
+                onChange={handleChange}
+                variant='outlined' 
+                label='Email' 
+              />
 
-            <TextField 
-              name='password'
-              value={form.password}
-              onChange={handleChange}
-              variant='outlined' 
-              label='Password' 
-              type={showPassword ? 'text' : 'password'} 
-              InputProps={{
-                  endAdornment: (   
-                      <IconButton onClick={() => setShowPassword(!showPassword)}>
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                  )
-              }} 
-            />
-            <Typography 
-              variant='subtitle2' 
-              align='right'
+              <TextField 
+                name='password'
+                value={form.password}
+                onChange={handleChange}
+                variant='outlined' 
+                label='Password' 
+                type={showPassword ? 'text' : 'password'} 
+                InputProps={{
+                    endAdornment: (   
+                        <IconButton onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                    )
+                }} 
+              />
+              <Typography 
+                variant='subtitle2' 
+                align='right'
+              >
+                Esqueci minha senha
+              </Typography>
+            </FieldsContainer>
+
+            <Button 
+              variant='contained' 
+              fullWidth
+              onClick={onClickLogin}
+              type='submit'
             >
-              Esqueci minha senha
-            </Typography>
-          </FieldsContainer>
-
-          <Button 
-            variant='contained' 
-            fullWidth
-            onClick={onClickLogin}
-          >
-            Entrar
-          </Button>
+              Entrar
+            </Button>
+          </Form>
           
           <Divider>ou</Divider>
           <Button 
