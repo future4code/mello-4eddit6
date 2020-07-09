@@ -44,13 +44,22 @@ const SignUpPage = () => {
     username: form.username
   }
 
-  const onClickRegister = (e) => {
+  const loginBody = {
+    email: form.email,
+    password: form.password
+  }
+
+  const onClickRegister = async(e) => {
     e.preventDefault()
     clear()
-    api.post('/signup', body).then(response => {
+    await api.post('/signup', body).then(response => {
       alert('criado com sucesso.')
     }).catch(e => {
       alert('Algo aconteceu' + e)
+    })
+    api.post('/login', loginBody).then(response => {
+      window.localStorage.setItem('token', response.data.token)
+      history.push('/posts')
     })
   }
 
