@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardContainer, InfoBars, ContentContainer, Text } from '../../Styled'
+import { CardContainer, InfoBars, ContentContainer, Text, TextArea } from '../../Styled'
 import { Typography } from '@material-ui/core'
 import { useForm } from '../../Hooks/UseForm'
 import api from '../../Utils/Api/Api'
@@ -53,8 +53,11 @@ const CommentPostCreate = (props) => {
     <CardContainer>
         <ContentContainer>
           <Typography>{props.question}</Typography>
-          <Text isPost={isPost} name='title' placeholder='Escreva aqui o titulo...' value={form.title} onChange={handleChange}/>
-          <Text name='text' placeholder='Escreva aqui....' value={form.text} onChange={handleChange}/>
+          {isPost ?
+          <Text isPost={isPost} name='title' placeholder='Escreva aqui o titulo...' value={form.title} onChange={handleChange}/> :
+          null
+          }
+          <TextArea name='text' placeholder='Escreva aqui....' value={form.text} onChange={handleChange}>kkkk</TextArea>
         </ContentContainer>
         <InfoBars>
             <Typography 
