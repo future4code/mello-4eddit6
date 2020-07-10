@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import PostCard from "../../Components/PostsCard";
-import FeedContext from "../../Utils/Context/FeedContext";
-import { Container, LogoutContainer } from "./Styled";
-import { ExitToApp } from "@material-ui/icons";
-import { Fab, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import { FullContainer } from "../../Styled";
+import React, { useState, useEffect } from 'react'
+import PostCard from '../../Components/PostsCard'
+import { Container, LogoutContainer } from './Styled'
+import {  ExitToApp } from '@material-ui/icons'
+import { Fab, makeStyles } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import { FullContainer } from '../../Styled'
+import api from '../../Utils/Api/Api'
 import CreatePost from "../../Components/CreatePost";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,35 +20,60 @@ const useStyles = makeStyles((theme) => ({
 const token = localStorage.getItem("token");
 
 const FeedPage = () => {
-  const posts = useContext(FeedContext);
-  const classes = useStyles();
-  const history = useHistory();
+
+  const [ posts, setPosts ] = useState([])
+  const classes = useStyles()
+  const history = useHistory()
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    history.replace("/");
-  };
+    localStorage.removeItem('token')
+    history.replace('/')
+  }
 
-  return (
+  const getPosts = async() => {
+    const axiosConfig = {
+      headers:  {
+          Authorization: token
+      }
+    }
+
+    const response = await api.get('/posts', axiosConfig)
+    setPosts(response.data.posts)
+  }
+
+  useEffect(() => {
+    getPosts()
+  },[])
+
+
+	return(
     <FullContainer>
       <CreatePost />
       <Container>
-        <LogoutContainer>
-          <Fab
-            variant="extended"
-            size="large"
-            className={classes.margin}
+        <LogoutContainer> 
+          <Fab 
+            variant='extended' 
+            size='large' 
+            className={classes.margin} 
             onClick={handleLogout}
-          >
+            >
             Logout
-            <ExitToApp className={classes.extendedIcon} />
+            <ExitToApp 
+              className={classes.extendedIcon} 
+            />
           </Fab>
         </LogoutContainer>
 
-        {posts &&
-          posts.map((post) => {
-            return <PostCard key={post.id} post={post} />;
-          })}
+        {posts && 
+         posts
+          .map(post => (
+            <PostCard 
+              key={post.id} 
+              post={post} 
+             />
+            ))
+           }
+
       </Container>
     </FullContainer>
   );

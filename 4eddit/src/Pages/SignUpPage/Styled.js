@@ -18,7 +18,7 @@ export const SignUpContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 400px;
-  height: 450px;
+  height: 400px;
   border: 1px solid black;
   border-radius: 10px;
   padding: 16px;
@@ -40,15 +40,15 @@ export const Divider = styled.span`
 `
 
 export const SignUpFields = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 200px;
-`
-
-export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80px;
+  height: 200px;
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 260px;
 `
