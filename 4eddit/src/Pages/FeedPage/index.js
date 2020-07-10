@@ -73,7 +73,9 @@ const FeedPage = () => {
             .map(post => (
               <PostCard 
                 key={post.id} 
-                post={post} 
+                post={post}
+                getPosts={getPosts} 
+                isDetails={false}
               />
             ))
         }

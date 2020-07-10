@@ -47,7 +47,7 @@ const PostsPage = () => {
   return (
     <FullContainer>
       <Container>
-        <PostCard post={details} />
+        <PostCard post={details} getDetails={getDetails} isDetails={true} />
         <CommentPostCreate
           name={'Comentar'}
           question={'Qual a sua opinião sobre o assunto?'}
@@ -61,7 +61,8 @@ const PostsPage = () => {
             .map(comment => (
               <CommentsCard 
                 key={comment.id} 
-                comment={comment} 
+                comment={comment}
+                getDetails={getDetails}
               />
               ))
           }

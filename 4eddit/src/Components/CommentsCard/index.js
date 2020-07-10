@@ -3,9 +3,16 @@ import { CardContainer, InfoBars, ContentContainer, BottomDetails } from '../../
 import { ArrowUpward, ArrowDownward } from '@material-ui/icons'
 import { Typography } from '@material-ui/core'
 import Skeleton from 'react-loading-skeleton'
+import api from '../../Utils/Api/Api'
+import { useParams } from 'react-router-dom'
 
 const CommentsCard = (props) => {
+
+  const comment = props.comment
   const [ isLoading, setIsLoading ] = useState(true)
+  const token = localStorage.getItem('token')
+  const { postId } = useParams()
+  const vote = comment.userVoteDirection
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,8 +21,18 @@ const CommentsCard = (props) => {
     return () => clearTimeout(timer)
 
   },[])
-    
-    const comment = props.comment
+
+  const handleVote = async(decision, id) => {
+
+    const axiosConfig = { headers: { Authorization: token } };
+
+    const body = {
+      direction: decision ? 1 : -1
+    };
+  
+      await api.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${postId}/comment/${id}/vote`, body, axiosConfig)
+      props.getDetails()
+    }; 
 
 		return(
       <CardContainer>
@@ -28,9 +45,15 @@ const CommentsCard = (props) => {
         </ContentContainer>
         <InfoBars>
           <BottomDetails>
-            <ArrowUpward />
+            <ArrowUpward
+              onClick={() => handleVote(true, comment.id)}
+              style={{color: vote === 1 ? '#00FF00' : '#000000'}}
+            />
             <Typography>{isLoading ? <Skeleton width={20} height={16} /> : comment.votesCount}</Typography>
-            <ArrowDownward />
+            <ArrowDownward
+              onClick={() => handleVote(false, comment.id)}
+              style={{color: vote === -1 ? '#FF0000' : '#000000'}}
+            />
           </BottomDetails>
         </InfoBars>
       </CardContainer>
