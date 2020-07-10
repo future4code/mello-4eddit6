@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
@@ -7,6 +7,7 @@ export const Container = styled.div`
   margin: 32px;
   min-height: auto;
   overflow: auto;
+  cursor: pointer;
 `;
 
 export const LogoutContainer = styled.div`
