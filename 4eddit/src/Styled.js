@@ -59,8 +59,11 @@ export const Text = styled.input`
   height: auto;
   outline: none;
   padding: 8px;
-  
-  :first-of-type{
-    display: ${props => props.isPost ? 'block' : 'none'};
-  }
+`
+
+export const TextArea = styled.textarea`
+  border: none;
+  min-height: 50px;
+  outline: none;
+  padding: 8px;
 `
