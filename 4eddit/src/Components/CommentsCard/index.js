@@ -19,21 +19,21 @@ const CommentsCard = (props) => {
 
 		return(
       <CardContainer>
-			<InfoBars>
-        <Typography variant='h5'>{ isLoading ? <Skeleton width={200} height={'auto'} /> : comment.username}</Typography>
-			</InfoBars>
-			<ContentContainer>
-        <Typography variant='h5'>{isLoading ? <Skeleton /> : comment.title}</Typography>
-        <Typography variant='h6'>{isLoading ? <Skeleton /> : comment.text}</Typography>
-			</ContentContainer>
-			<InfoBars>
-				<BottomDetails>
-					<ArrowUpward />
-          <Typography>{isLoading ? <Skeleton width={20} height={16} /> : comment.votesCount}</Typography>
-					<ArrowDownward />
-				</BottomDetails>
-			</InfoBars>
-		</CardContainer>
+        <InfoBars>
+          <Typography variant='h5'>{ isLoading ? <Skeleton width={200} height={'auto'} /> : comment.username}</Typography>
+        </InfoBars>
+        <ContentContainer>
+          <Typography variant='h5'>{isLoading ? <Skeleton /> : comment.title}</Typography>
+          <Typography variant='h6'>{isLoading ? <Skeleton /> : comment.text}</Typography>
+        </ContentContainer>
+        <InfoBars>
+          <BottomDetails>
+            <ArrowUpward />
+            <Typography>{isLoading ? <Skeleton width={20} height={16} /> : comment.votesCount}</Typography>
+            <ArrowDownward />
+          </BottomDetails>
+        </InfoBars>
+      </CardContainer>
 		)
 }
 

@@ -7,7 +7,7 @@ import {  ArrowBack } from '@material-ui/icons'
 import {  makeStyles, Fab } from '@material-ui/core'
 import { FullContainer } from '../../Styled'
 import api from '../../Utils/Api/Api'
-import CreateComment from "../../Components/CreateComment";
+import CommentPostCreate from '../../Components/CreatCommentPostCard'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -42,11 +42,19 @@ const PostsPage = () => {
     getDetails()
   }, [])
 
+  const comments = details.comments
+
   return (
     <FullContainer>
-      <CreateComment />
       <Container>
         <PostCard post={details} />
+        <CommentPostCreate
+          name={'Comentar'}
+          question={'Qual a sua opinião sobre o assunto?'}
+          isPost={false}
+          getDetails={getDetails}
+          token={token}
+        />
 
         {comments &&
           comments
@@ -54,7 +62,7 @@ const PostsPage = () => {
               <CommentsCard 
                 key={comment.id} 
                 comment={comment} 
-               />
+              />
               ))
           }
 

@@ -53,3 +53,14 @@ export const BottomDetails = styled.div`
     justify-content: flex-end;
   }
 `
+
+export const Text = styled.input`
+  border: none;
+  height: auto;
+  outline: none;
+  padding: 8px;
+  
+  :first-of-type{
+    display: ${props => props.isPost ? 'block' : 'none'};
+  }
+`
