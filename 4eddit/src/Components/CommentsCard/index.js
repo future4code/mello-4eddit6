@@ -37,4 +37,4 @@ const CommentsCard = (props) => {
 		)
 }
 
-export default CommentsCard
+export default CommentsCard;

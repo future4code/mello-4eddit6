@@ -7,6 +7,7 @@ import {  ArrowBack } from '@material-ui/icons'
 import {  makeStyles, Fab } from '@material-ui/core'
 import { FullContainer } from '../../Styled'
 import api from '../../Utils/Api/Api'
+import CreateComment from "../../Components/CreateComment";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
 const token = localStorage.getItem('token')
 
 const PostsPage = () => {
-
+  
+  const classes = useStyles();
+  const { postId } = useParams();
+  const history = useHistory();
   const [ details, setDetails ] = useState({})
-  const classes = useStyles()
-  const { postId } = useParams()
-  const history = useHistory()
 
   const getDetails = async() => {
     const axiosConfig = {
@@ -41,22 +42,36 @@ const PostsPage = () => {
     getDetails()
   }, [])
 
-  const comments = details.comments
-
-  return(
+  return (
     <FullContainer>
+      <CreateComment />
       <Container>
         <PostCard post={details} />
-        {comments && comments.map(comment => (<CommentsCard key={comment.id} comment={comment} />))}
+
+        {comments &&
+          comments
+            .map(comment => (
+              <CommentsCard 
+                key={comment.id} 
+                comment={comment} 
+               />
+              ))
+          }
+
         <GoBackContainer>
-          <Fab size='large' variant='extended' className={classes.margin} onClick={() => history.push('/posts')}>
+          <Fab
+            size="large"
+            variant="extended"
+            className={classes.margin}
+            onClick={() => history.push("/posts")}
+          >
             <ArrowBack className={classes.extendedIcon} />
             Voltar
           </Fab>
         </GoBackContainer>
       </Container>
     </FullContainer>
-  )
-}
+  );
+};
 
-export default PostsPage
+export default PostsPage;

@@ -6,6 +6,7 @@ import { Fab, makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { FullContainer } from '../../Styled'
 import api from '../../Utils/Api/Api'
+import CreatePost from "../../Components/CreatePost";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const token = localStorage.getItem('token')
+const token = localStorage.getItem("token");
 
 const FeedPage = () => {
 
@@ -47,17 +48,35 @@ const FeedPage = () => {
 
 	return(
     <FullContainer>
+      <CreatePost />
       <Container>
         <LogoutContainer> 
-          <Fab variant='extended' size='large' className={classes.margin} onClick={handleLogout}>
+          <Fab 
+            variant='extended' 
+            size='large' 
+            className={classes.margin} 
+            onClick={handleLogout}
+            >
             Logout
-            <ExitToApp className={classes.extendedIcon} />
+            <ExitToApp 
+              className={classes.extendedIcon} 
+            />
           </Fab>
         </LogoutContainer>
-        {posts && posts.map(post => (<PostCard key={post.id} post={post} />))}
+
+        {posts && 
+         posts
+          .map(post => (
+            <PostCard 
+              key={post.id} 
+              post={post} 
+             />
+            ))
+           }
+
       </Container>
     </FullContainer>
-  )
-}
+  );
+};
 
-export default FeedPage
+export default FeedPage;
