@@ -6,7 +6,7 @@ import { Fab, makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { FullContainer } from '../../Styled'
 import api from '../../Utils/Api/Api'
-import CreatePost from "../../Components/CreatePost";
+import CommentPostCreate from '../../Components/CreatCommentPostCard'
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -45,10 +45,8 @@ const FeedPage = () => {
     getPosts()
   },[])
 
-
 	return(
     <FullContainer>
-      <CreatePost />
       <Container>
         <LogoutContainer> 
           <Fab 
@@ -63,16 +61,22 @@ const FeedPage = () => {
             />
           </Fab>
         </LogoutContainer>
-
+        <CommentPostCreate 
+          name={'Criar Post'}
+          question={'No que você esta pensando hoje?'}
+          isPost={true}
+          getPosts={getPosts}
+          token={token}
+        />
         {posts && 
-         posts
-          .map(post => (
-            <PostCard 
-              key={post.id} 
-              post={post} 
-             />
+          posts
+            .map(post => (
+              <PostCard 
+                key={post.id} 
+                post={post} 
+              />
             ))
-           }
+        }
 
       </Container>
     </FullContainer>

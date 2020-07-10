@@ -44,8 +44,8 @@ const LoginPage = () => {
     password: ''
   })
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
+  const handleChange = (e) => {
+    const { name, value } = e.target
     onChange(name, value)
   }
 
