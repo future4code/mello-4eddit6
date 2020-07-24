@@ -9,14 +9,17 @@ import { ArrowUpward, ArrowDownward } from "@material-ui/icons";
 import { Typography } from "@material-ui/core";
 import { useHistory, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import axios from "axios";
+import api from "../../Utils/Api/Api";
 
 const PostCard = (props) => {
+
   const postInfo = props.post;
   const history = useHistory();
   const { postId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const vote = postInfo.userVoteDirection
+ 
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,43 +32,21 @@ const PostCard = (props) => {
     history.push(`/posts/${id}`);
   };
 
-  const handleDirectionUp = (id) => {
-    const Headers = { headers: { Authorization: token } };
-    const body = {
-      direction: 1,
-    };
-    axios
-      .put(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${id}/vote`,
-        body,
-        Headers
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
+  const handleVote = async(decision, id) => {
 
-  const handleDirectionDown = (id) => {
-    const Headers = { headers: { Authorization: token } };
+    const axiosConfig = { headers: { Authorization: token } };
+
     const body = {
-      direction: -1,
+      direction: decision ? 1 : -1
     };
-    axios
-      .put(
-        `https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${id}/vote`,
-        body,
-        Headers
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
+
+    await api.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${id}/vote`, body, axiosConfig)
+    if(props.isDetails){
+      props.getDetails()
+    }else {
+      props.getPosts()
+    }
+  };  
 
   return (
     <CardContainer>
@@ -89,9 +70,8 @@ const PostCard = (props) => {
       <InfoBars>
         <BottomDetails>
           <ArrowUpward
-            onClick={() => {
-              handleDirectionUp(postInfo.id);
-            }}
+            onClick={() => handleVote(true, postInfo.id)}
+            style={{color: vote === 1 ? '#00FF00' : '#000000'}}
           />
           <Typography>
             {isLoading ? (
@@ -101,9 +81,8 @@ const PostCard = (props) => {
             )}
           </Typography>
           <ArrowDownward
-            onClick={() => {
-              handleDirectionDown(postInfo.id);
-            }}
+            onClick={() => handleVote(false, postInfo.id)}
+            style={{color: vote === -1 ? '#FF0000' : '#000000'}}
           />
         </BottomDetails>
         <BottomDetails>
